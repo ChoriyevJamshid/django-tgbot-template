@@ -9,7 +9,7 @@ from aiogram.client.session.aiohttp import AiohttpSession
 from aiogram.enums import ParseMode
 from aiogram.fsm.storage.memory import MemoryStorage
 
-from tgbot.bot import handlers
+from bot import handlers
 
 
 def setup_handlers(dp: Dispatcher) -> None:
@@ -27,6 +27,7 @@ async def setup_aiogram(dp: Dispatcher) -> None:
 
 async def aiogram_on_startup_polling(dispatcher: Dispatcher, bot: Bot) -> None:
     await setup_aiogram(dispatcher)
+    await bot.delete_webhook(drop_pending_updates=True)
 
 
 async def aiogram_on_shutdown_polling(dispatcher: Dispatcher, bot: Bot) -> None:
@@ -54,6 +55,3 @@ def main() -> None:
     dp.shutdown.register(aiogram_on_shutdown_polling)
     asyncio.run(dp.start_polling(bot))
 
-
-# if __name__ == "__main__":
-#     main()

@@ -2,7 +2,7 @@ import asyncio
 from django.conf import settings
 from django.core.management import BaseCommand
 from utils.bot import send_message
-from tgbot.bot.app import main
+from bot.app import main
 
 
 class Command(BaseCommand):
